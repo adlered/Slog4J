@@ -1,5 +1,12 @@
 # Slog4J - 简单日志记录插件
 
+![GitHub top language](https://img.shields.io/github/languages/top/AdlerED/Slog4J.svg)
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/AdlerED/Slog4J.svg)
+![GitHub All Releases](https://img.shields.io/github/downloads/AdlerED/Slog4J/total.svg)
+![GitHub](https://img.shields.io/github/license/AdlerED/Slog4J.svg)
+![GitHub last commit](https://img.shields.io/github/last-commit/AdlerED/Slog4J.svg)
+![GitHub watchers](https://img.shields.io/github/watchers/AdlerED/Slog4J.svg?style=social)
+
 Slog4J(Simple Logger For Java)是一款轻量级的Java日志记录插件，**上手难度极低**，刚接触Java的小白也能轻松使用。
 
 通过使用Slog4J，你能自定义向控制台输出内容的格式，并可以自动在本地创建日志文件以便随时查阅。
@@ -201,7 +208,7 @@ Slog4J.logAndFlushWithLevel("info","Slog4J time unit is customized!");
 
 #### 停止与开启Slog4J
 
-Slog4J的**`输出线程池`**默认是开启的。你可能发现了，当你单独执行Slog4J后，程序不会自动停止。这是因为Slog4J的线程仍在运行。
+Slog4J的`输出线程池`默认是开启的。你可能发现了，当你单独执行Slog4J后，程序不会自动停止。这是因为Slog4J的线程仍在运行。
 
 你可以使用：
 
