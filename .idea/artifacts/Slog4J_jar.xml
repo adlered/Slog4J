@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Slog4J:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Slog4J_jar</output-path>
+    <root id="archive" name="Slog4J.jar">
+      <element id="module-output" name="Slog4J" />
+    </root>
+  </artifact>
+</component>
