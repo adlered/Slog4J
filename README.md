@@ -34,7 +34,7 @@ Slog4J(Simple Logger For Java)是一款轻量级的Java日志记录插件，**�
 
 直接将已经打包好的JAR文件引入到你的Java项目中：
 
-[点击下载](/jar/Slog4J.jar)
+[点击下载](https://www.stackoverflow.wiki/blog/articles/2019/03/28/1553762166613.html)
 
 ### Slog4J基本使用方法
 
