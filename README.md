@@ -22,6 +22,10 @@ Slog4J(Simple Logger For Java)是一款轻量级的Java日志记录插件，**�
 * 输出日志至数据库，并使用线程池大大提升效率（可选，需要导入JDBC）
 * 使用缓存池式日志输出存储，先记录至内存，再一起Flush输出
 
+## 全部命令一览
+
+[如需查阅全部命令，请点我跳转](#全部命令一览表)
+
 ## Get started!
 
 只需几步，你就能为你的项目配置Slog4j。
@@ -30,7 +34,7 @@ Slog4J(Simple Logger For Java)是一款轻量级的Java日志记录插件，**�
 
 直接将已经打包好的JAR文件引入到你的Java项目中：
 
-[点击下载]()
+[点击下载](/out/artifacts/Slog4J_jar/Slog4J.jar)
 
 ### Slog4J基本使用方法
 
@@ -194,3 +198,201 @@ Slog4J.logAndFlushWithLevel("info","Slog4J time unit is customized!");
 其中，`setTimeUnit(unit);`就是设置时间单位的方法。
 
 `unit`是范围在**`0-12`**之间的整数。你可以更改数字调试出你需要的结果。
+
+#### 停止与开启Slog4J
+
+Slog4J的**`输出线程池`**默认是开启的。你可能发现了，当你单独执行Slog4J后，程序不会自动停止。这是因为Slog4J的线程仍在运行。
+
+你可以使用：
+
+```$xslt
+Slog4J.close();
+```
+
+来停止Slog4J的全部线程。
+
+**!!! 强烈建议在即将停止程序时执行Slog4J.close() !!!**
+
+如在Tomcat中部署Slog4J，在停止Tomcat时不执行`Slog4J.close()`可能会无法正常关闭Tomcat。
+
+**执行`close()`后，Slog4J线程不会立即强行停止，而是等待所有日志写入后再停止全部线程。**
+
+如果由于某些原因，你需要强制终止Slog4J的全部线程，可以使用命令：
+
+```$xslt
+Slog4J.shutdownAllSlog4JThreadPoolNow();
+```
+
+#### 连接MySQL
+
+Slog4J使用`JDBC`进行MySQL操作。推荐使用版本`8.0`，在本项目根目录下已经附件了一个`mysql-connector-java-8.0.11.jar`，你可以直接使用而无需额外下载。
+
+你可以使用下面命令使Slog4J向MySQL中输出：
+
+```$xslt
+Slog4J.mysql.setURL("jdbc:mysql://localhost/Users?useSSL=false");
+Slog4J.mysql.setUser("root");
+Slog4J.mysql.setPassword("toor");
+Slog4J.enableMySQLOutput();
+```
+
+`setURL`用来设置MySQL的地址，让我们将语句拆分：
+
+```$xslt
+jdbc:mysql://
+```
+
+由于Slog4J使用`JDBC`进行数据库操作，所以必须包含。
+
+```$xslt
+localhost/Users
+```
+
+`localhost`是MySQL的地址，`Users`是指定的数据库。
+
+`setUser`是MySQL的用户名，`setPassword`是MySQL的密码。
+
+在设置MySQL的参数并使用`Slog4J.enableMySQLOutput();`启用MySQL后，Slog4J会**自动创建**一个`Slog4J`表，Slog4J会向其中输出所有的日志。
+
+#### 输出功能的开启与关闭
+
+你可以灵活开启关闭Slog4J的三种输出方法：`控制台`、`本地文件`、`MySQL`：
+
+```$xslt
+//启用MySQL日志输出
+Slog4J.enableMySQLOutput();
+//关闭MySQL日志输出
+Slog4J.disableMySQLOutput();
+
+//启用本地文件日志输出
+Slog4J.enableFileOutput();
+//关闭本地文件日志输出
+Slog4J.disableFileOutput();
+
+//启用控制台日志输出
+Slog4J.enableConsoleOutput();
+//关闭控制台日志输出
+Slog4J.disableConsoleOutput();
+```
+
+Slog4J默认的日志输出策略是：
+
+* 默认**启用**控制台输出
+* 默认**启用**本地文件输出
+* 默认**关闭**MySQL输出
+
+# 全部命令一览表
+
+`setFormat(String format)`
+自定义输出格式
+
+`flush()`和`write()`
+将缓存输出
+
+`wipeLogList()`
+清空缓存但不输出
+
+`restoreFormatDefault()`
+重置输出格式为默认
+
+`setTimeUnit(int unit)`
+设置时间格式（0-12）
+
+`disableColor()`
+关闭彩色输出
+
+`setLogDir(String logDir)`
+设置本地输出文件的目录（默认为相对目录"Slog4J"）
+
+`shutdownAllSlog4JThreadPool()`和`close()`
+安全地关闭全部Slog4J线程
+
+`start()`
+重新开启Slog4J全部线程，会清空全部缓存
+
+`shutdownAllSlog4JThreadPoolNow()`
+强制关闭全部Slog4J线程
+
+`disableConsoleOutput()`
+关闭控制台输出
+
+`enableConsoleOutput()`
+开启控制台输出（默认已经开启）
+
+`disableFileOutput()`
+关闭本地文件输出
+
+`enableFileOutput()`
+开启本地文件输出（默认已经开启）
+
+`disableMySQLOutput()`
+关闭MySQL输出
+
+`enableMySQLOutput()`
+开启MySQL输出
+
+`isBootLevel()`
+设置输出级别为BOOT
+
+`isLogLevel()`
+设置输出级别为LOG
+
+`isInfoLevel()`
+设置输出级别为INFO
+
+`isWarnLevel()`
+设置输出级别为WARN
+
+`isImportantLevel()`
+设置输出级别为IMPORTANT
+
+`isErrorLevel()`
+设置输出级别为ERROR
+
+`isCrashLevel()`
+设置输出级别为CRASH
+
+`isDownLevel()`
+设置输出级别为DOWN
+
+`isShutdownLevel()`
+设置输出级别为SHUTDOWN
+
+`isStacktracerLevel()`
+设置输出级别为STACKTRACER
+
+`isNullLevel()`
+设置输出级别为NULL
+
+`setLevelByString(String level)`
+以传递字符串方式设置输出级别，可用值（不区分大小写）：`BOOT` `LOG` `INFO` `WARN` `IMPORTANT` `ERROR` `CRASH` `DOWN` `SHUTDOWN` `STACKTRACER` `NULL`
+
+`log(String log)`
+将日志存到缓存中
+
+`logAndFlush(String log)`
+将日志存到缓存中，并输出
+
+`logAndFlushWithLevel(String level, String log)`
+将日志存到缓存中，以特定值等级输出。可用值（不区分大小写）：`BOOT` `LOG` `INFO` `WARN` `IMPORTANT` `ERROR` `CRASH` `DOWN` `SHUTDOWN` `STACKTRACER` `NULL`
+
+`printStackTrace(Exception e)`
+让Slog4J接管错误，并以设定格式输出
+
+`mysql.setURL(String url)`
+设置MySQL地址
+
+`mysql.setUser(String user)`
+设置MySQL用户名
+
+`mysql.setPassword(String password)`
+设置MySQL密码
+
+`getFileAbsolutePath()`
+获取当前日志文件绝对路径
+
+`getSlog4JVersion()`
+获取Slog4J版本
+
+`getDeveloperInfo()`
+获取开发者信息

@@ -7,10 +7,11 @@ public class Tester {
         //Slog4J.disableColor(false);
         //Slog4J.disableFileOutput();
         //Slog4J.disableConsoleOutput();
-        /*Slog4J.mysql.setURL("jdbc:mysql://localhost/Users?useSSL=false");
+        Slog4J.mysql.setURL("jdbc:mysql://localhost/Users?useSSL=false");
         Slog4J.mysql.setUser("root");
         Slog4J.mysql.setPassword("@Adler42650909951");
         Slog4J.enableMySQLOutput();
+
         Slog4J.setLogDir("/Users/adler/logs/");
         Slog4J.logAndFlush("Process is begin, please wait...");
         Slog4J.logAndFlushWithLevel("boot","Booting system...");
@@ -33,7 +34,7 @@ public class Tester {
         Slog4J.start();
         Slog4J.logAndFlush("hi");
         Slog4J.logAndFlush(Slog4J.getFileAbsolutePath());
-        Slog4J.close();*/
+        Slog4J.close();
         //System.out.println(Slog4J.getFileAbsolutePath());
         /*Slog4J.isInfoLevel();
         Slog4J.logAndFlush("Hello world!");*/
