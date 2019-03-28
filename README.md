@@ -7,11 +7,9 @@
 ![GitHub last commit](https://img.shields.io/github/last-commit/AdlerED/Slog4J.svg)
 ![GitHub watchers](https://img.shields.io/github/watchers/AdlerED/Slog4J.svg?style=social)
 
-Slog4J(Simple Logger For Java)是一款轻量级的Java日志记录插件，**上手难度极低**，刚接触Java的小白也能轻松使用。
-
-通过使用Slog4J，你能自定义向控制台输出内容的格式，并可以自动在本地创建日志文件以便随时查阅。
-
-你可以将插件应用在绝大部分Java环境中。
+Slog4J(Simple Logger For Java)是一款轻量级的Java日志记录插件，**上手难度极低**，刚接触Java的小白也能轻松使用。  
+通过使用Slog4J，你能自定义向控制台输出内容的格式，并可以自动在本地创建日志文件以便随时查阅。  
+你可以将插件应用在绝大部分Java环境中。  
 
 **注**：本插件不提供数据统计功能，仅提供日志输出控制。开发本插件目的旨在最简化地记录日志。
 
