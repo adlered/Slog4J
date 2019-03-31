@@ -31,7 +31,8 @@ public class FileExecutor extends Thread {
                 }
                 Cache.randomAccessFile = new RandomAccessFile(Definer.file, "rw");
                 Cache.randomAccessFile.seek(Cache.randomAccessFile.length());
-                Cache.randomAccessFile.writeBytes(log);
+                //Cache.randomAccessFile.writeBytes(log);
+                Cache.randomAccessFile.write(log.getBytes());
                 Cache.randomAccessFile.close();
             } catch (Exception e) {
                 GeneralInnerExceptionHandler.handle(e);
