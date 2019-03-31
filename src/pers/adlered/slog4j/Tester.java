@@ -13,7 +13,7 @@ public class Tester {
         Slog4J.enableMySQLOutput();
 
         Slog4J.setLogDir("/Users/adler/logs/");
-        Slog4J.logAndFlush("Process is begin, please wait...");
+        Slog4J.logAndFlush("加载中Process is begin, please wait...");
         Slog4J.logAndFlushWithLevel("boot","Booting system...");
         Slog4J.setTimeUnit(0);
         try {
