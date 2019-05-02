@@ -9,7 +9,7 @@ public class Tester {
         //Slog4J.disableConsoleOutput();
         Slog4J.mysql.setURL("jdbc:mysql://localhost/Users?useSSL=false");
         Slog4J.mysql.setUser("root");
-        Slog4J.mysql.setPassword("@Adler42650909951");
+        Slog4J.mysql.setPassword("123456");
         Slog4J.enableMySQLOutput();
 
         Slog4J.setLogDir("/Users/adler/logs/");
