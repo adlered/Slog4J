@@ -7,8 +7,9 @@
 ![GitHub last commit](https://img.shields.io/github/last-commit/AdlerED/Slog4J.svg)
 ![GitHub watchers](https://img.shields.io/github/watchers/AdlerED/Slog4J.svg?style=social)
 
-[#中文版本](中文版本)
-[#english-version](English version)
+[中文版本](#中文版本)
+
+[English version](#english-version)
 
 # 中文版本
 
@@ -408,3 +409,398 @@ Slog4J默认的日志输出策略是：
 获取开发者信息
 
 # English version
+
+Slog4J (Simple Logger For Java) is a lightweight Java logging plug-in. ** It is extremely difficult to get started. ** Just touching Java can easily be used.
+By using Slog4J, you can customize the format of the output to the console and automatically create log files locally for easy access.
+You can apply the plugin to most Java environments.
+
+**Note**: This plug-in does not provide data statistics and only provides log output control. The purpose of developing this plugin is to make logging in the most simplified way.
+
+## Why Slog4J?
+
+* Three minutes of mastery
+* Reference in the library to get started
+* The frame is simple, small, and almost does not occupy memory
+* Use thread pool + cache to take full advantage of performance without blocking code
+* Static statement environment configuration, no need to create a configuration file, all the configuration can be achieved with code
+* Dates are stored locally for easy access
+* Customizable log output, a large number of custom statements can be called
+* Support printing error report, record the program crash, beautiful and convenient
+* Beautify console log output, color console output
+* Output logs to the database and use thread pools to greatly improve efficiency (optional, need to import JDBC)
+* Use cache pooled log output storage, first record to memory, then together with Flush output
+
+## List of all commands
+
+<a href="#All Commands List">For all commands, please click here to jump</a>
+
+## Get started!
+
+In just a few steps, you can configure Slog4j for your project.
+
+### Download JAR
+
+Directly import the already packaged JAR files into your Java project:
+
+<a href="https://www.stackoverflow.wiki/blog/articles/2019/03/28/1553762166613.html" target="_blank">Click to download</a>
+
+### Slog4J basic usage
+
+**Please note: Since Slog4J uses static statement configuration, please configure the configuration commands (such as setting MySQL, setting the time unit) as much as possible in the main method, and try to ensure that it is executed first. **
+
+#### Cache
+
+Slog4J uses the cache to store logs, using the command:
+
+```$xslt
+Slog4J.log("Hello world!");
+```
+Run the command and you will find that there is no running result. Try the following command:
+
+```$xslt
+Slog4J.log("Hello world!");
+Slog4J.log("Goodbye world!");
+Slog4J.flush();
+```
+
+Get the output:
+
+```$xslt
+[?]-[2019-03-28 12:54:15:394]-[0] Hello world!
+[?]-[2019-03-28 12:54:15:395]-[1] Goodbye world!
+```
+
+At this point, Slog will output all the logs written in the cache.
+
+#### Output and automatically flush the cache
+
+Not only can you use `Slog4J.log("");` with `Slog4J.flush();` to output the cache, you can also use the following command to write to the log and output immediately:
+
+```$xslt
+Slog4J.logAndFlush("Process is begin, please wait...");
+```
+
+Get the output:
+
+```$xslt
+[?]-[2019-03-28 13:02:51:546]-[0] Process is begin, please wait...
+```
+
+#### Output to local
+
+Slog4J has ** console output** and **local output** enabled by default. When you are just executing the code, Slog4J has saved the text in the Slog4J folder** in the default ** project root directory.
+
+You can use the command to get the output location of the current log of Slog4J:
+
+```$xslt
+System.out.println(Slog4J.getFileAbsolutePath());
+```
+
+Get the output:
+
+```$xslt
+/Users/adler/SL4J/Slog4J/2019-03-28 12H.txt
+```
+
+#### Log output level
+
+You may have noticed that the output above contains a question mark `?`, where we should specify the output level of the log:
+
+```$xslt
+Slog4J.setLevelByString("info");
+Slog4J.logAndFlush("Hello world!");
+```
+
+Get the output:
+
+```$xslt
+[INFO]-[2019-03-28 13:07:01:862]-[0] Hello world!
+```
+
+The `INFO` here is colored, but it cannot be reflected due to text restrictions.
+
+You can also use the command to set the output level:
+
+```$xslt
+Slog4J.isInfoLevel();
+Slog4J.logAndFlush("Hello world!");
+```
+
+You can also combine the above two lines of statements into one line:
+
+```$xslt
+Slog4J.logAndFlushWithLevel("info","Hello world!");
+```
+
+#### All output levels
+
+In addition to this `info`, we also provide the following output levels:
+
+* BOOT
+* LOG
+* INFO
+* WARN
+* IMPORTANT
+* ERROR
+* CRASH
+* DOWN
+* SHUTDOWN
+* STACKTRACER
+* NULL
+
+#### Exception processing output
+
+Slog4J wraps the exception handling statement, we can artificially create an exception for display - the dividend is 0:
+
+```$xslt
+Try {
+    Int a = 1/0;
+} catch (Exception e) {
+    Slog4J.printStackTrace(e);
+}
+```
+
+Get the output:
+
+![](/img/exception.png)
+
+#### Custom Output Format
+
+We can modify the format of the output, using the command:
+
+```$xslt
+Slog4J.setFormat("Date: ${time} Rank: ${level} ${count} Article: ${words}");
+Slog4J.logAndFlush("Slog4J output style is customized!");
+```
+
+Get the output:
+
+```$xslt
+Date: 2019-03-28 13:20:52:168 Level:? Article 0 Content: Slog4J output style is customized!
+```
+
+#### All output formats
+
+Currently, all available output format variables are:
+
+* `${words}` log content
+* `${time}` current time
+* `${level}` log level
+* `${count}` The Nth log output by Slog4J
+
+#### Setting the date format
+
+In addition to the default date format `year-month-day hour:minute:second:millisecond`, you can also set the format of the date:
+
+```$xslt
+Slog4J.setTimeUnit(8);
+Slog4J.logAndFlushWithLevel("info","Slog4J time unit is customized!");
+```
+
+Get the output:
+
+```$xslt
+[INFO]-[13:28:32]-[0] Slog4J time unit is customized!
+```
+
+Among them, `setTimeUnit(unit);` is the method of setting the time unit.
+
+`unit` is an integer ranging from **`0-12`**. You can change the numbers to debug the results you need.
+
+#### Stop and open Slog4J
+
+Slog4J's `output thread pool` is enabled by default. You may have discovered that when you execute Slog4J separately, the program does not stop automatically. This is because the thread of Slog4J is still running.
+
+you can use:
+
+```$xslt
+Slog4J.close();
+```
+
+To stop all threads of Slog4J.
+
+**!!! It is highly recommended to execute Slog4J.close() !!!** when the program is about to be stopped.
+
+If Slog4J is deployed in Tomcat, not executing `Slog4J.close()` when stopping Tomcat may not close Tomcat properly.
+
+** After executing `close()`, the Slog4J thread will not forcefully stop immediately, but wait for all logs to be written before stopping all threads. **
+
+If for some reason you need to forcefully terminate all threads of Slog4J, you can use the command:
+
+```$xslt
+Slog4J.shutdownAllSlog4JThreadPoolNow();
+```
+
+#### Connecting MySQL
+
+Slog4J uses `JDBC` for MySQL operations. It is recommended to use the version `8.0`. A `mysql-connector-java-8.0.11.jar` has been attached to the root directory of this project, you can use it directly without additional download.
+
+You can use the following command to make Slog4J output to MySQL:
+
+```$xslt
+Slog4J.mysql.setURL("jdbc:mysql://localhost/Users?useSSL=false");
+Slog4J.mysql.setUser("root");
+Slog4J.mysql.setPassword("toor");
+Slog4J.enableMySQLOutput();
+```
+
+`setURL` is used to set the address of MySQL, let us split the statement:
+
+```$xslt
+Jdbc:mysql://
+```
+
+Since Slog4J uses `JDBC` for database operations, it must be included.
+
+```$xslt
+Localhost/Users
+```
+
+`localhost` is the address of MySQL, and `Users` is the specified database.
+
+`setUser` is the MySQL username, and `setPassword` is the MySQL password.
+
+After setting the MySQL parameters and using `Slog4J.enableMySQLOutput();` to enable MySQL, Slog4J will automatically create a `Slog4J` table, and Slog4J will output all the logs to it.
+
+#### Turning on and off the output function
+
+You can flexibly turn on the three output methods that turn off Slog4J: `console`, `local file`, `MySQL`:
+
+```$xslt
+/ / Enable MySQL log output
+Slog4J.enableMySQLOutput();
+/ / Close the MySQL log output
+Slog4J.disableMySQLOutput();
+
+/ / Enable local file log output
+Slog4J.enableFileOutput();
+/ / Close the local file log output
+Slog4J.disableFileOutput();
+
+/ / Enable console log output
+Slog4J.enableConsoleOutput();
+/ / Close the console log output
+Slog4J.disableConsoleOutput();
+```
+
+The default log output strategy for Slog4J is:
+
+* Default **Enable** console output
+* Default ** Enabled ** Local File Output
+* Default ** off ** MySQL output
+
+#All command list
+
+`setFormat(String format)`
+Custom output format
+
+`flush()` and `write()`
+Cache output
+
+`wipeLogList()`
+Empty the cache but not output
+
+`restoreFormatDefault()`
+Reset output format to default
+
+`setTimeUnit(int unit)`
+Set the time format (0-12)
+
+`disableColor()`
+Turn off color output
+
+`setLogDir(String logDir)`
+Set the directory of the local output file (default is the relative directory "Slog4J")
+
+`shutdownAllSlog4JThreadPool()` and `close()`
+Safely shut down all Slog4J threads
+
+`start()`
+Re-open all Slog4J threads, will clear all caches
+
+`shutdownAllSlog4JThreadPoolNow()`
+Force all Slog4J threads to be closed
+
+`disableConsoleOutput()`
+Turn off console output
+
+`enableConsoleOutput()`
+Turn on console output (it is already enabled by default)
+
+`disableFileOutput()`
+Turn off local file output
+
+`enableFileOutput()`
+Enable local file output (default is enabled)
+
+`disableMySQLOutput()`
+Turn off MySQL output
+
+`enableMySQLOutput()`
+Turn on MySQL output
+
+`isBootLevel()`
+Set the output level to BOOT
+
+`isLogLevel()`
+Set the output level to LOG
+
+`isInfoLevel()`
+Set the output level to INFO
+
+`isWarnLevel()`
+Set the output level to WARN
+
+`isImportantLevel()`
+Set the output level to IMPORTANT
+
+`isErrorLevel()`
+Set the output level to ERROR
+
+`isCrashLevel()`
+Set the output level to CRASH
+
+`isDownLevel()`
+Set the output level to DOWN
+
+`isShutdownLevel()`
+Set the output level to SHUTDOWN
+
+`isStacktracerLevel()`
+Set the output level to STACKTRACER
+
+`isNullLevel()`
+Set the output level to NULL
+
+`setLevelByString(String level)`
+Set the output level by passing the string, the available value (not case sensitive): `BOOT` `LOG` `INFO` `WARN` `IMPORTANT` `ERROR` `CRASH` `DOWN` `SHUTDOWN` `STACKTRACER` `NULL `
+
+`log(String log)`
+Save the log to the cache
+
+`logAndFlush(String log)`
+Save the log to the cache and output
+
+`logAndFlushWithLevel(String level, String log)`
+Save the log to the cache and output it at a specific value level. Available values ​​(not case sensitive): `BOOT` `LOG` `INFO` `WARN` `IMPORTANT` `ERROR` `CRASH` `DOWN` `SHUTDOWN` `STACKTRACER` `NULL`
+
+`printStackTrace(Exception e)`
+Let Slog4J take over the error and output in the format
+
+`mysql.setURL(String url)`
+Set MySQL address
+
+`mysql.setUser(String user)`
+Set MySQL username
+
+`mysql.setPassword(String password)`
+Set MySQL password
+
+`getFileAbsolutePath()`
+Get the absolute path of the current log file
+
+`getSlog4JVersion()`
+Get the Slog4J version
+
+`getDeveloperInfo()`
+Get developer information
