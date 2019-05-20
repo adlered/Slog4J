@@ -432,7 +432,7 @@ You can apply the plugin to most Java environments.
 
 ## List of all commands
 
-<a href="#All Commands List">For all commands, please click here to jump</a>
+<a href="#all-commands-list">For all commands, please click here to jump</a>
 
 ## Get started!
 
@@ -689,7 +689,7 @@ The default log output strategy for Slog4J is:
 * Default ** Enabled ** Local File Output
 * Default ** off ** MySQL output
 
-#All command list
+# All command list
 
 `setFormat(String format)`
 Custom output format
