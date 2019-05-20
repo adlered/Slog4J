@@ -432,7 +432,7 @@ You can apply the plugin to most Java environments.
 
 ## List of all commands
 
-<a href="#all-commands-list">For all commands, please click here to jump</a>
+<a href="#all-command-list">For all commands, please click here to jump</a>
 
 ## Get started!
 
