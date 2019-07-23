@@ -2,7 +2,6 @@
 
 ![GitHub top language](https://img.shields.io/github/languages/top/AdlerED/Slog4J.svg)
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/AdlerED/Slog4J.svg)
-![GitHub All Releases](https://img.shields.io/github/downloads/AdlerED/Slog4J/total.svg)
 ![GitHub](https://img.shields.io/github/license/AdlerED/Slog4J.svg)
 ![GitHub last commit](https://img.shields.io/github/last-commit/AdlerED/Slog4J.svg)
 ![GitHub watchers](https://img.shields.io/github/watchers/AdlerED/Slog4J.svg?style=social)
@@ -408,9 +407,12 @@ Slog4J默认的日志输出策略是：
 `getDeveloperInfo()`
 获取开发者信息
 
+`disableFileOutputColor()`
+关闭文件输出显示颜色
+
 # English version
 
-Slog4J (Simple Logger For Java) is a lightweight Java logging plug-in. ** It is extremely difficult to get started. ** Just touching Java can easily be used.
+Slog4J (Simple Logger For Java) is a lightweight Java logging plug-in. ** It is extremely easy to get started. ** Just touching Java can easily be used.
 By using Slog4J, you can customize the format of the output to the console and automatically create log files locally for easy access.
 You can apply the plugin to most Java environments.
 
@@ -804,3 +806,6 @@ Get the Slog4J version
 
 `getDeveloperInfo()`
 Get developer information
+
+`disableFileOutputColor()`
+Disable local file output color include
