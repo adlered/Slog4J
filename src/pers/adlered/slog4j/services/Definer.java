@@ -34,6 +34,7 @@ public class Definer {
     public static boolean disableColor = false;
     public static boolean databaseHasBeenSetup = false;
     public static boolean connectionHasBeenConnected = false;
+    public static boolean disableFileOutputColor = false;
 
     public static boolean disableAppendToConsole = false;
     public static boolean disableAppendToFile = false;

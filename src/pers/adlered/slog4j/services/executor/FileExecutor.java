@@ -23,11 +23,13 @@ public class FileExecutor extends Thread {
     public void run() {
         synchronized (this) {
             try {
-                //由于字体颜色可能导致部分终端不兼容乱码，tail -f支持彩色
-                //i = i.replaceAll("\\[3[1-7]{1}(;)?(1)?m|\\[0m|\\^\\[", "");
                 String log = "";
                 for (String i : list) {
                     log += i + "\r\n";
+                }
+                //由于字体颜色可能导致部分终端不兼容乱码，tail -f支持彩色
+                if (Definer.disableFileOutputColor) {
+                    log = log.replaceAll("\\[3[1-7]{1}(;)?[1-7]?m|\\[0m", "");
                 }
                 Cache.randomAccessFile = new RandomAccessFile(Definer.file, "rw");
                 Cache.randomAccessFile.seek(Cache.randomAccessFile.length());

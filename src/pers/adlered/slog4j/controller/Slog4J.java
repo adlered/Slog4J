@@ -42,11 +42,12 @@ public class Slog4J extends Appender {
 
     //切换显示颜色模式
     public static void disableColor(boolean wouldYouLikeTo) {
-        if (wouldYouLikeTo) {
-            Definer.disableColor = true;
-        } else {
-            Definer.disableColor = false;
-        }
+            Definer.disableColor = wouldYouLikeTo;
+    }
+
+    //切换文件是否输出颜色
+    public static void disableFileOutputColor(boolean wouldYouLikeTo) {
+        Definer.disableFileOutputColor = wouldYouLikeTo;
     }
 
     //获取当前设置目录的绝对位置

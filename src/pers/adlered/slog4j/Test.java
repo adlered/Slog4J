@@ -7,7 +7,9 @@ public class Test {
         //Slog4J.disableColor(false);
         //Slog4J.disableFileOutput();
         //Slog4J.disableConsoleOutput();
-        Slog4J.mysql.setURL("jdbc:mysql://localhost/Users?useSSL=false");
+        Slog4J.disableColor(false);
+        Slog4J.disableFileOutputColor(true);
+        Slog4J.mysql.setURL("jdbc:mysql://localhost/Users?useSSL=false&useUnicode=true&characterEncoding=utf8");
         Slog4J.mysql.setUser("root");
         Slog4J.mysql.setPassword("123456");
         Slog4J.enableMySQLOutput();
