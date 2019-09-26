@@ -6,6 +6,13 @@
 ![GitHub last commit](https://img.shields.io/github/last-commit/AdlerED/Slog4J.svg)
 ![GitHub watchers](https://img.shields.io/github/watchers/AdlerED/Slog4J.svg?style=social)
 
+# 请注意
+
+应[torocket](https://github.com/torocket)的邀请，我们将把开发重心集中在另外一个slog4j日志插件：[slog4j](https://github.com/torocket/slog4j) 之中。它能更好的捕获并处理程序的异常，拥有更强大的性能。  
+当然，两个Slog4J插件的设计思路不同，当前项目开发可能会比较缓慢，但不会停止更新。
+
+# 语言
+
 [中文版本](#中文版本)
 
 [English version](#english-version)

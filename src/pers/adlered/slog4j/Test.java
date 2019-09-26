@@ -2,6 +2,8 @@ package pers.adlered.slog4j;
 
 import pers.adlered.slog4j.controller.Slog4J;
 
+import java.util.List;
+
 public class Test {
     public static void main(String[] args) {
         //Slog4J.disableColor(false);
@@ -12,7 +14,15 @@ public class Test {
         Slog4J.mysql.setURL("jdbc:mysql://localhost/Users?useSSL=false&useUnicode=true&characterEncoding=utf8");
         Slog4J.mysql.setUser("root");
         Slog4J.mysql.setPassword("123456");
-        Slog4J.enableMySQLOutput();
+        //Slog4J.enableMySQLOutput();
+
+        Slog4J.log("hello");
+        try {
+            List<String> list = null;
+            list.add("hello world test");
+        } catch (NullPointerException NPE) {
+            Slog4J.printStackTrace(NPE);
+        }
 
         Slog4J.setLogDir("/Users/adler/logs/");
         Slog4J.logAndFlush("加载中Process is begin, please wait...");
